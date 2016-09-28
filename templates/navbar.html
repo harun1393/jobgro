@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<div id="home">
+    	<div class="headerLine">
+	<div id="menuF" class="default">
+		<div class="container">
+			<div class="row">
+				<div class="logo col-md-4">
+					<div>
+						<a href="#">
+							<img src="{% static 'images/logo.png' %}">
+						</a>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="navmenu"style="text-align: center;">
+						<ul id="menu">
+							<li class="active" ><a href="{% url 'home' %}">Home</a></li>
+							<li><a href="{% url 'student_signin' %}">Student Login</a></li>
+							<li><a href="{% url 'student_register' %}">Student Register</a></li>
+                            <li><a href="{% url 'employer_login' %}">Employer Login</a></li>
+                            <li><a href="{% url 'employer_register' %}">Employer Register</a></li>
+							<li><a href="{% url 'student_profile' %}">Profile</a></li>
+
+							<!--li><a href="#features">Features</a></li-->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

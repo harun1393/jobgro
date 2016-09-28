@@ -1,0 +1,109 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+{% load staticfiles %}
+    {% include 'dashboard-top-nav.html' %}
+<div class="page-title">
+              <div class="title_left">
+
+                {% include 'page-nav.html' %}
+
+              </div>
+
+
+            </div>
+
+              <div class="col-md-10 col-md-offset-1">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-3 panel panel-default">
+                            <div class="panel-heading">
+                                <img src="/media/{{job.company.logo}}" alt="{{ job.company.logo }}" height="150" width="150"/>
+                            </div>
+                            <div class="panel-body">
+                                <div class="x_title">
+                                    <h2>{{ job.company.name }}</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <p>{{ job.company.description }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="x_title">
+                                        <h1>{{ job.title }}</h1>
+                                    <div class="clearfix"></div>
+                                        <button type="button" class="btn btn-primary pull-right" id="applyBtn">Apply Now</button>
+
+                                </div>
+
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-body">{{ job.summery }}</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+         <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script >
+// Get the modal
+var modal = document.getElementById('myModal');
+
+
+// Get the button that opens the modal
+var btn = document.getElementById("applyBtn");
+console.log(modal);
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("close");
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    console.log("okk click")
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+{% endblock %}

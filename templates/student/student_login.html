@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+{% include 'navbar2.html' %}
+
+
+<div class="container">
+
+			<div class="row wrap">
+				<div class="col-md-12 gallery">
+        <!--
+        <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>-->
+            <div class="container">
+                <div class="row vertical-offset-100">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row-fluid user-row">
+                                    <h3>Student Login</h3>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <p class="text-danger">{{ errMsg }}</p>
+                                <form accept-charset="UTF-8" role="form" class="form-signin" method="post" action="{% url 'student_signin' %}">
+                                     {% csrf_token %}
+                                    <fieldset>
+                                        <label class="panel-login">
+                                            <div class="login_result"></div>
+                                        </label>
+                                        <input class="form-control" placeholder="Email" id="username" type="text" name="email">
+                                        <input class="form-control" placeholder="Password" id="password" type="password" name="password">
+                                        <br></br>
+                                        <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Login »">
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+				</div>
+			</div>
+		</div>
+
+{% endblock %}

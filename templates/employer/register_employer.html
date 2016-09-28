@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+{% include 'navbar.html' %}
+<br>
+ <div class="row ">
+     <div class="col-md-5 col-md-offset-3">
+         <div class="panel panel-default">
+             <div class="panel-heading"> <i class="fa fa-plus blue"></i> Register Employer</div>
+             <div class="panel-body">
+                <form role="form" method="post" action="{% url 'employer_register' %}" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                        {% if form.non_field_errors %}
+                            <h3 style="color:red">{{ form.non_field_errors }}</h3>
+                        {% endif %}
+                        {% if errMsg %}
+                            <p class="text-danger">{{ errMsg }}</p>
+                        {% endif %}
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="text-primary">{{ field.label_tag }}</label>
+                                    {{ field }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="btn btn-primary" type="submit" name="submit" > <i class="fa fa-plus"> Register</i> </button>
+                </form>
+             </div>
+         </div>
+     </div>
+ </div>
+
+{% endblock %}

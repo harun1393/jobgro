@@ -30,4 +30,6 @@ urlpatterns = [
     url(r'^register/', include(account.urls)),
     url(r'^$',student.views.home, name='home'),
     url(r'^logout/$',account.views.logout_view, name='logout'),
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

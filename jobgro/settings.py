@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'employer',
     'account',
     'job',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE = [
@@ -109,8 +110,38 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Custom authentication backend
-#AUTHENTICATION_BACKENDS = ('account.backends.AccountAuthBackend',)
+# Social authentication backend
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '589342747904686'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'f31dd58144872fe7d5e8bfa67700c13f'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+LOGIN_URL = '/sign_in/'
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
+SOCIAL_AUTH_USER_MODEL = 'account.MyUser'
+
+SOCIAL_AUTH_PIPELINE=(
+    'social.pipeline.social_auth.social_auth_user',
+    'social.pipeline.associate.associate_by_email',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.update_user_details'
+)
+
+
+
 AUTH_USER_MODEL = 'account.MyUser'
 
 

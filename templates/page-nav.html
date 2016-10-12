@@ -1,5 +1,10 @@
-<ul class="nav navbar-nav">
+
+
+<ul class="nav navbar-nav ">
                     <li class=""><a href="{% url 'home' %}" ><strong class="text-primary">Home</strong></a> </li>
                     <li><a href="{% url 'all-job-list' %}"><strong class="text-primary">All Jobs</strong></a> </li>
-                    <li><a href=""><strong class="text-primary">Dashboard</strong></a> </li>
+
+                    {% if request.user.type == 'emp' %}
+                    <li><a href="{% url 'employer_dashboard' %}"><strong class="text-primary">Dashboard</strong></a> </li>
+                    {% endif %}
                 </ul>

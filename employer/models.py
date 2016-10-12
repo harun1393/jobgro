@@ -15,6 +15,7 @@ class CompanyProfile(models.Model):
     field = models.CharField(max_length=150, blank=True, null=True)
     type = models.CharField(max_length=150, blank=True, null=True)
     description = models.TextField()
+    post_free_job = models.BooleanField(default=False)
 
     def __unicode__(self):
         return str(self.name)

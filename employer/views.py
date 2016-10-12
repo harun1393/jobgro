@@ -34,9 +34,10 @@ def employer_login(request):
     else:
         return render(request, 'employer/employer_login.html')
 
-
+from job.models import JobPost
 def employer_dashboard(request):
-    context = {}
+    jobPosts = JobPost.objects.filter(company__user=request.user)
+    context = {'jobPosts':jobPosts}
     return render(request, 'employer/employer_dashboard.html', context)
 
 

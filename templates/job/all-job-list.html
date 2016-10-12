@@ -1,76 +1,48 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 {% load staticfiles %}
-    {% include 'dashboard-top-nav.html' %}
-
-            <div class="page-title">
-              <div class="title_left">
-
-                {% include 'page-nav.html' %}
-
-              </div>
 
 
+<section id="services" class="service-item">
+	   <div class="container">
+            <div class="center wow fadeInDown">
+                <h2>All Jobs</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
             </div>
 
-              <div class="col-md-10 col-md-offset-1">
-                <div class="x_panel">
-                  <div class="x_content">
-                    <div class="row">
-                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <ul class="pagination pagination-split">
-                          <li><a href="#">A</a></li>
-                          <li><a href="#">B</a></li>
-                          <li><a href="#">C</a></li>
-                          <li><a href="#">D</a></li>
-                          <li><a href="#">E</a></li>
-                          <li>...</li>
-                          <li><a href="#">W</a></li>
-                          <li><a href="#">X</a></li>
-                          <li><a href="#">Y</a></li>
-                          <li><a href="#">Z</a></li>
-                        </ul>
-                      </div>
+            <div class="row">
+                {% for job in allJobs %}
 
-                      <div class="clearfix"></div>
-
-                      {% for job in allJobs %}
-
-                      <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i></i></h4>
-                            <div class="left col-xs-7">
-                              <h2>{{ job.title }} {{ job.id }}</h2>
-                              <p><strong>{{ job.company.name}} </strong> || {{ job.company.city}},{{ job.company.state }}</p>
-                              <ul class="list-unstyled">
-                                <li><i class="fa fa-building"></i>Date #: {{ job.post_date }} </li>
-                              </ul>
-                            </div>
-                            <div class="right col-xs-5 text-center">
-                              <img src="/media/{{job.company.logo}}" height="100" width="100" alt="" class="img-thumbnail img-responsive">
-                            </div>
-                          </div>
-                          <div class="col-xs-12 bottom text-center">
-                            <div class="col-xs-12 col-sm-6 emphasis">
-                              <button type="button" class="btn btn-success "> <i class="fa fa-check-square-o"></i>
-                                Apply Now </button>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 emphasis">
-                              <a type="button" class="btn btn-primary" href="{% url 'job-detail' job.id %}">
-                                <i class="fa fa-user"> </i> View Description
-                              </a>
-                            </div>
-                          </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="media services-wrap wow fadeInDown">
+                        <div class="pull-left">
+                            <img class="img-responsive company-logo " src="/media/{{job.company.logo}}">
                         </div>
-                      </div>
-                        {% endfor %}
-
+                        <div class="media-body">
+                            <h3 class="media-heading"><a href="{% url 'job-detail' job.id %}"> {{ job.title }}</a></h3>
+                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+                {% endfor %}
+
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#services-->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% endblock %}

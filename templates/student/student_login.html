@@ -2,10 +2,15 @@
 {% load staticfiles %}
 
 {% block content %}
-{% include 'navbar2.html' %}
 
 
-<div class="container">
+
+
+<section id="partner" >
+        <div class="container">
+            <div class="row">
+                <div class="features">
+                    <div class="container">
 
 			<div class="row wrap">
 				<div class="col-md-12 gallery">
@@ -35,6 +40,16 @@
                                         <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Login »">
                                     </fieldset>
                                 </form>
+                                <br>
+                                 <a href="{% url 'social:begin' 'facebook' %}?next={% url 'student_profile' %}" class="btn btn-block btn-social btn-facebook">
+                                    <span class="fa fa-facebook"></span> Sign in with Facebook
+                                 </a>
+                                 <a class="btn btn-block btn-social btn-linkedin">
+                                    <span class="fa fa-linkedin"></span> Sign in with LinkedIn
+                                 </a>
+
+                                <br>
+                                <p>Have no account ??<a href="{% url 'student_register' %}" class="pull-right">Register</a> </p>
                             </div>
                         </div>
                     </div>
@@ -44,5 +59,13 @@
 				</div>
 			</div>
 		</div>
+
+
+                </div><!--/.services-->
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section>
+
+
 
 {% endblock %}

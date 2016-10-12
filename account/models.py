@@ -49,6 +49,8 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    is_authenticated = True
+
 
     def get_full_name(self):
         '''
@@ -62,6 +64,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         '''
         return self.first_name
+
 
     '''
 

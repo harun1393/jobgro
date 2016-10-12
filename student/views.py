@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from student.models import StudentProfile
+from job.models import JobPost
 from django.shortcuts import get_object_or_404
 from .forms import ProfileEditForm
 from django.views.generic import TemplateView
@@ -11,7 +12,11 @@ from django.conf import settings
 
 
 def home(request):
-    return render(request, 'home.html')
+    student_list = StudentProfile.objects.all()[:5]
+    job_list = JobPost.objects.all()[:6]
+    print job_list
+    context = {'student_list':student_list, 'job_list':job_list}
+    return render(request, 'home.html', context)
 
 
 def student_login(request):
@@ -24,7 +29,7 @@ def student_login(request):
             if userName.is_active:
                 if userName.type == 'std':
                     login(request, userName)
-                    return HttpResponseRedirect(reverse('student_panel'))
+                    return HttpResponseRedirect(reverse('student_profile'))
                 else:
                     error = "You'r not a student"
                     context = {"errMsg": error}

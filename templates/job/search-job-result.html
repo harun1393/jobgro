@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section id="recent-works" >
+        <div class="container">
+            <div class="row">
+                <div class="features">
+                    <div class="container">
+
+
+
+
+
+
+    <div class="col-md-10 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <form class="form-horizontal form-label-left" action="{% url 'search-job' %}" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        {% for fields in form %}
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                {{ fields }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-primary" value="Search">
+                        </span>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if job_posts %}
+
+                        {% for job in job_posts %}
+                        <div class="col-sm-6 col-md-4">
+                    <div class="media services-wrap wow fadeInDown">
+                        <div class="pull-left">
+                            <img class="img-responsive company-logo " src="/media/{{job.company.logo}}">
+                        </div>
+                        <div class="media-body">
+                            <h3 class="media-heading"><a href="{% url 'job-detail' job.id %}"> {{ job.title }}</a></h3>
+                            <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                        </div>
+                    </div>
+                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+                        </div>
+</div><!--/.services-->
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section>
+
+
+{% endblock %}

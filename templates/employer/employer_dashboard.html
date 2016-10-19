@@ -5,7 +5,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                {% include 'page-nav.html' %}
+
               </div>
 
               <div class="title_right">
@@ -23,35 +23,38 @@
                   <div class="x_title">
                     <h2>Posted Jobs</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        <li>
+                          <a href="{% url 'edit_company_profile' %}" class="btn btn-primary "><span class="text text-info">Update Company Profile</span></i></a>
                       </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li>
+                          <a href="{% url 'post-job' %}" class="btn btn-primary btn-success ">Post New Job</i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                  {% if jobPosts %}
-                    <p>Simple table with project listing with progress and editing options</p>
+
+                    <p>
+                        {% if messages %}
+
+                        {% for message in messages %}
+                        <h2><span class="text text-danger"> {{ message }}</span></h2>
+                        {% endfor %}
+
+                        {% endif %}
+
+                    </p>
+                      {% if jobPosts %}
 
                     <!-- start project list -->
                     <table class="table table-striped projects">
                       <thead>
                         <tr>
                           <th style="width: 1%">#</th>
-                          <th style="width: 20%">Job Name</th>
-                          <th>Team Members</th>
-                          <th>Project Progress</th>
-                          <th>Status</th>
+                          <th style="width: 50%">Job Name</th>
+                          <th>Applicant Number</th>
+
+                          <th></th>
                           <th style="width: 20%">#Edit</th>
                         </tr>
                       </thead>
@@ -66,34 +69,13 @@
                             <small>Created 01.01.2015</small>
                           </td>
                           <td>
-                            <ul class="list-inline">
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                            </ul>
+                            5
                           </td>
-                          <td class="project_progress">
-                            <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                            </div>
-                            <small>57% Complete</small>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-success btn-xs">Success</button>
-                          </td>
+
+                          <td></td>
                           <td>
                             <a href="{% url 'job-applicant' job.pk %}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="{% url 'delete-job' job.pk %}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                       {% endfor %}

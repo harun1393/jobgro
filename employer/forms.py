@@ -14,4 +14,4 @@ class CompanyProfileForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control col-md-7 col-xs-12'}))
     class Meta:
         model = CompanyProfile
-        exclude = ('user', )
+        exclude = ('user', 'post_free_job')

@@ -1,39 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section id="recent-works" >
-        <div class="container">
-            <div class="row">
-                <div class="features">
-                    <div class="container">
+<section id="services" class="service-item">
+	   <div class="container">
+            <div class="center wow fadeInDown">
+                <h2>Search Job</h2>
+                <div id="custom-search-input">
+                            <div class="input-group col-md-8 col-md-offset-2">
 
+                                <form class="form-inline" action="{% url 'search-job' %}" method="post">{% csrf_token %}
+                                  <div class="form-group">
+                                    <label class="sr-only" for="exampleInputEmail3">Job Title</label>
+                                    <input type="text" name="job_title" class="form-control" id="exampleInputEmail3" placeholder="Search Job...">
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="sr-only" for="exampleInputPassword3">Password</label>
+                                    <input type="text" name="location" class="form-control" id="exampleInputPassword3" placeholder="Location">
+                                  </div>
 
+                                  <button type="submit" class="btn btn-primary">Search</button>
+                                </form>
 
-
-
-
-    <div class="col-md-10 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_content">
-                <form class="form-horizontal form-label-left" action="{% url 'search-job' %}" method="post">{% csrf_token %}
-                    <div class="form-group">
-                        {% for fields in form %}
-                        <div class="col-sm-4">
-                            <div class="input-group">
-                                {{ fields }}
                             </div>
                         </div>
-                        {% endfor %}
-                        <span class="input-group-btn">
-                            <input type="submit" class="btn btn-primary" value="Search">
-                        </span>
-                      </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {% if job_posts %}
 
+            </div>
+
+            <div class="row">
+                {% if job_posts %}
                         {% for job in job_posts %}
                         <div class="col-sm-6 col-md-4">
                     <div class="media services-wrap wow fadeInDown">
@@ -47,16 +41,18 @@
                     </div>
                 </div>
                         {% endfor %}
+                {% else %}
+                    <h2 class="text text-danger ">No Job Found</h2>
                     </div>
                 </div>
             </div>
         </div>
+
     {% endif %}
-                        </div>
-</div><!--/.services-->
+
             </div><!--/.row-->
         </div><!--/.container-->
-    </section>
+    </section><!--/#services-->
 
 
 {% endblock %}

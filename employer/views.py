@@ -6,6 +6,7 @@ from account.forms import UserForm
 from django.contrib.auth.hashers import make_password
 from .models import CompanyProfile
 from .forms import CompanyProfileForm
+from job.models import JobPost
 
 
 def employer_login(request):
@@ -21,23 +22,23 @@ def employer_login(request):
                 else:
                     error = "Your id Deactivated !"
                     context = {"errMsg": error}
-                    return render(request, 'student/student_login.html', context)
+                    return render(request, 'employer/employer_login.html', context)
             else:
                 error = "You are not an Employer"
                 context = {"errMsg": error}
-                return render(request, 'student/student_login.html', context)
+                return render(request, 'employer/employer_login.html', context)
         else:
             # context = RequestContext(request)
             error = "Email or password incorrect"
             context = {"errMsg": error}
-            return render(request, 'student/student_login.html', context)
+            return render(request, 'employer/employer_login.html', context)
     else:
         return render(request, 'employer/employer_login.html')
 
-from job.models import JobPost
+
 def employer_dashboard(request):
     jobPosts = JobPost.objects.filter(company__user=request.user)
-    context = {'jobPosts':jobPosts}
+    context = {'jobPosts': jobPosts}
     return render(request, 'employer/employer_dashboard.html', context)
 
 
@@ -53,6 +54,11 @@ def employer_register(request):
                 user.password = make_password(password1) # Django default password hash
                 user.type = 'emp'    # User type = employer
                 user.save()
+                email = form.cleaned_data['email']
+                new_user = authenticate(email=email, password=password2)
+                profile = CompanyProfile(user=new_user)
+                profile.save()
+                login(request, new_user)
                 return HttpResponseRedirect(reverse('employer_dashboard'))
             else:
                 errmsg = "Password Does not match"
@@ -76,7 +82,6 @@ def edit_company_profile(request):
     user = request.user
     try:
         profile = user.companyprofile
-        print profile
     except CompanyProfile.DoesNotExist:
         profile = CompanyProfile(user=user)
     if request.method == 'POST':

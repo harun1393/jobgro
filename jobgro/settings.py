@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from config import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -67,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -113,36 +116,47 @@ AUTH_PASSWORD_VALIDATORS = [
 # Social authentication backend
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.linkedin.LinkedinOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
+
 )
+
+
 
 
 SOCIAL_AUTH_FACEBOOK_KEY = '589342747904686'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'f31dd58144872fe7d5e8bfa67700c13f'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_emailaddress']
 LOGIN_URL = '/sign_in/'
-SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
-SOCIAL_AUTH_USER_MODEL = 'account.MyUser'
 
-SOCIAL_AUTH_PIPELINE=(
-    'social.pipeline.social_auth.social_auth_user',
-    'social.pipeline.associate.associate_by_email',
-    'social.pipeline.user.get_username',
-    'social.pipeline.user.create_user',
-    'social.pipeline.social_auth.associate_user',
-    'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.update_user_details'
-)
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
+SOCIAL_AUTH_LINKEDIN_OAUTH2_FIELD_SELECTORS = ['email-address']
 
+SOCIAL_AUTH_PIPELINE = (
+        'social.pipeline.social_auth.social_details',
+        'social.pipeline.social_auth.social_uid',
+        'social.pipeline.social_auth.auth_allowed',
+        'social.pipeline.social_auth.social_user',
+        'account.pipeline.associate_by_email',
+        'social.pipeline.user.get_username',
+        'social.pipeline.user.create_user',
+        'social.pipeline.social_auth.associate_user',
+        'social.pipeline.social_auth.load_extra_data',
+        'social.pipeline.user.user_details',
+        'account.pipeline.save_profile',
+
+    )
 
 
 AUTH_USER_MODEL = 'account.MyUser'
+#SOCIAL_AUTH_USER_FIELDS = ('email',)
 
 
 # Internationalization

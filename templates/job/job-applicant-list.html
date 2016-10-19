@@ -40,6 +40,7 @@
                       <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        {% if applications %}
                       <ul class="list-unstyled msg_list">
                           {% for application in applications %}
                             <li>
@@ -58,6 +59,9 @@
                             </li>
                           {% endfor %}
                       </ul>
+                        {% else %}
+                        <h2>No applicant applied for this job</h2>
+                        {% endif %}
                     </div>
                   </div>
                 </div>

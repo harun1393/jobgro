@@ -18,7 +18,7 @@ def student_register(request):
                 user.password = make_password(password)
                 user.type = 'std'
                 user.save()
-                return HttpResponseRedirect(reverse('student_panel'))
+                return HttpResponseRedirect(reverse('update_std_profile'))
             else:
                 errmsg = "Password Does not match"
                 context = {'form': form, 'errMsg': errmsg}
